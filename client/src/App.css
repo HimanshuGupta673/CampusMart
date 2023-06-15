@@ -1,0 +1,36 @@
+body{
+  background-color: #b9bcc3;
+}
+.fresh {
+  color: red;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  font-size: 26px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-variant: small-caps;
+}
+
+.fresh h2 {
+  white-space: nowrap;
+  animation: scroll 10s linear infinite;
+  width: min-content;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(50%);
+    color: rgb(247, 52, 52);
+  }
+  100% {
+    transform: translateX(-100%);
+    color: rgb(0, 0, 0);
+  }
+}
+
+.fresh h2 {
+  animation-timing-function: linear;
+;
+}
+
+
