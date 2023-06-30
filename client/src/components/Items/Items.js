@@ -10,7 +10,7 @@ import { AccountContext } from '../Context/AccountProvider';
 
 function Items() {
   const {user,setUser} = useContext(AccountContext)
-  const [numItemsToShow, setNumItemsToShow] = useState(8);
+  const [numItemsToShow, setNumItemsToShow] = useState(7);
   const [isLoading, setIsLoading] = useState(false);
   const items = useSelector(state => state.items)
   const categoryItem = useSelector(state => state.categoryItems)
@@ -38,14 +38,14 @@ function Items() {
   const handleLoadMore = () => {
     setIsLoading(true);
     setTimeout(() => {
-      setNumItemsToShow(numItemsToShow + 8);
+      setNumItemsToShow(numItemsToShow + 7);
       setIsLoading(false);
     }, 1000); // Adjust the delay time as needed
   };
 
 
   return (
-    <div className='itemsBody mx-auto mt-16 mb-20 px-[10%] min-h-[47vh]'>
+    <div className='itemsBody mx-auto mt-16 mb-20 px-[10%] min-h-[50vh]'>
       <div className="fresh text-3xl bg-[#eff1f3] font-serif text-center">
         <div className='fresh'>
           <h2>Welcome To CAMPUSmart , Your Online Campus Store : Fresh Recommendations</h2>
@@ -64,7 +64,7 @@ function Items() {
         >
           <div className="itemsBodyIn grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4  mt-3 mb-6">
           {items.length === 0 && (
-            <div className=" mt-20 mx-auto "><h1 className='text-4xl'>Nothing to show...</h1></div>
+            <div className=" mt-20 mx-auto "><h1 className='text-xl flex justify-center'>Nothing to show...</h1></div>
           )}
           {getItems().map((item) => (
             <Item key={item._id} item={item} />

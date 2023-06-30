@@ -27,7 +27,7 @@ function Cart() {
   };
 
   return (
-    <div className='cart mt-20 w-[80%] md:w-[50%] mx-auto border-2 bg-zinc-200 px-11 min-h-screen h-auto mb-10' style={{ minHeight: '72.79vh' }}>
+    <div className='cart mt-20 w-[80%] md:w-[50%] mx-auto border-2 bg-zinc-200 px-11 min-h-screen h-auto mb-10' style={{ minHeight: '75vh' }}>
       <h1 className='text-3xl font-bold mb-6 flex justify-center'>Cart Items</h1>
       {getCart().map((item, index) => (
         <div key={item._id} className='flex md:flex-row items-center mb-4 border-b-2'>

@@ -97,7 +97,10 @@ export const getItemDetails = async (request, response) => {
 }
 export const getCategoryItem = async (request, response) => {
   try {
-    const products = await item.find({ 'selectItem': request.params.category.toLowerCase() })
+    let products = await item.find({ 'selectItem': request.params.category.toLowerCase() })
+    if(products.length==0){
+      products = await item.find({ 'category': request.params.category.toLowerCase() })
+    }
     return response.status(200).json(products)
 
   } catch (error) {

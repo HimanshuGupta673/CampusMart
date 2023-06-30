@@ -16,7 +16,7 @@ function ItemInfo() {
   }, [dispatch, id])
 
   return (
-    <div className='itemInfoBody h-full min-h-[67.57vh] my-20 bg-[#eff1f3]'>
+    <div className='itemInfoBody h-full min-h-[70vh] my-20 bg-[#eff1f3]'>
   <div className="itemInfoBodyIn mx-5 md:flex">
     
     <div className='flex md:w-7/12 my-1'>
