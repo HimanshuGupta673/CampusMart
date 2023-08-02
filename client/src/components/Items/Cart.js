@@ -31,7 +31,7 @@ function Cart() {
       <h1 className='text-3xl font-bold mb-6 flex justify-center'>Cart Items</h1>
       {getCart().map((item, index) => (
         <div key={item._id} className='flex md:flex-row items-center mb-4 border-b-2'>
-          <img src={`http://localhost:8000/${item.path}`} alt={item.title} className='w-32 h-32 object-cover rounded-md mb-4 md:mr-4 mr-4' />
+          <img src={`https://campusmart-lxbl.onrender.com/${item.path}`} alt={item.title} className='w-32 h-32 object-cover rounded-md mb-4 md:mr-4 mr-4' />
           <div className='flex flex-col md:flex-row items-center justify-between w-full'>
             <p className='text-base mb-2 md:mb-0 md:mr-4'>Listed on: {moment(item.posted).format('DD-MM-YYYY')}</p>
             <p className='text-base mb-2 md:mb-0 md:mr-4'>Price: {item.price}</p>

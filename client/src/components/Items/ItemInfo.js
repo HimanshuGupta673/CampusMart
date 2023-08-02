@@ -20,7 +20,7 @@ function ItemInfo() {
   <div className="itemInfoBodyIn mx-5 md:flex">
     
     <div className='flex md:w-7/12 my-1'>
-      <img className='h-4/5 w-4/5 mx-auto my-3' src={`http://localhost:8000/${item.path}`} alt="error" />
+      <img className='h-4/5 w-4/5 mx-auto my-3' src={`https://campusmart-lxbl.onrender.com/${item.path}`} alt="error" />
     </div>
 
     <div className=' bg-[#F9F9F9] p-8 relative overflow-x-auto md:w-5/12'>
