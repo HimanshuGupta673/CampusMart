@@ -45,7 +45,7 @@ function Items() {
 
 
   return (
-    <div className='itemsBody mx-auto mt-16 mb-20 px-[10%] min-h-[50vh]'>
+    <div className='itemsBody mx-auto mt-16 mb-20 px-[10%] min-h-[55vh]'>
       <div className="fresh text-3xl bg-[#eff1f3] font-serif text-center">
         <div className='fresh'>
           <h2>Welcome To CAMPUSmart , Your Online Campus Store : Fresh Recommendations</h2>

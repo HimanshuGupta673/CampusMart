@@ -86,7 +86,7 @@ function OtpVerify() {
           <Loader />
         </div>
       )}
-      <div className="flex flex-col items-center justify-center h-[75.4vh] sm:h-[89vh]">
+      <div className="flex flex-col items-center justify-center h-[85.4vh] sm:h-[89vh]">
         <form onSubmit={handleSubmit} className="w-full max-w-md p-4">
           <div className="mb-4">
             <label htmlFor="otp" className="block mb-2 font-medium">
