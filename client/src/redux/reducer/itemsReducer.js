@@ -36,6 +36,7 @@ export const cartItemReducer = (state = [], action) => {
     case actionTypes.GET_CARTITEMS:
       return action.payload;
     case actionTypes.DELETE_CARTITEM:
+      // the filter method returns a new array containing the filtered elements.
       return state.filter(product => product._id !== action.payload);
     default:
       return state;
