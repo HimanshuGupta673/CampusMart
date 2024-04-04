@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { authenticateLogin } from '../../redux/actions';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AccountContext } from '../Context/AccountProvider';  //because in a project there may be a no.of context's
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from '../Loader/Loader';
 function LoginUser() {
-
+  const navigate = useNavigate();
   const loginInitialValues = {
     email: '',
     password: ''
@@ -37,12 +37,12 @@ function LoginUser() {
       toast.error("Enter your password")
     } else {
       setIsLoading(true)
-      const data = await authenticateLogin(login);
+      const response = await authenticateLogin(login);
       setIsLoading(false)
-      if (data) {
-        if (data.status !== 201) {
+      if (response) {
+        if (response.status !== 201) {
           setUser(login.email);
-          localStorage.setItem('login',`${login.email}`)
+          localStorage.setItem('login',login.email)
           setLogin(loginInitialValues);
           toast.success('login Successful!', {
             position: "top-center",
@@ -51,8 +51,11 @@ function LoginUser() {
             closeOnClick: true,
             theme: "colored", 
           });
+          setTimeout(()=>{
+            navigate('/')
+          },2000);
         } else {
-          const { email, password } = data.data.errors;
+          const { email, password } = response.data.errors;
           if (email) generateError(email);
           else if (password) generateError(password);
         }

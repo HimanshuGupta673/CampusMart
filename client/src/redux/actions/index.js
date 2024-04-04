@@ -5,7 +5,7 @@ const API_URL = 'https://campusmart-lxbl.onrender.com'
 
 export const sellNewItem = (data) => async(dispatch) => {
     try {
-        console.log("index.ja ke andar",data)
+        // console.log("index.ja ke andar",data)
            const res = await axios.post(`${API_URL}/items`,data)
            const resCart = await axios.post(`${API_URL}/cart`,res.data)
         dispatch({ type: SELL_NEWITEM , payload: res.data });  //dispatch karne se res jaayege reducer ke andar and reducer mein bhi do hote hai state and actions..so yha se dispatch karne par reducer ke action mein jata hai
@@ -83,20 +83,20 @@ export const forgotPassword = async (email) =>{
         console.log("error while forgotting password : ",err.message)
     }
 }
-export const Otpverify = async (otp) => {
+export const Otpverify = async ({email,otp}) => {
     try {
-      return await axios.post(`${API_URL}/otpVerification`, { otp }); // Wrap otp in an object
+      return await axios.post(`${API_URL}/otpVerification`, {email, otp }); // Wrap otp in an object
     } catch (err) {
       console.log("Error while OTP verification: ", err.message);
     }
   };
-export const Otpverify2 = async (otp) => {
-    try {
-      return await axios.post(`${API_URL}/forgot-password`, { otp }); // Wrap otp in an object
-    } catch (err) {
-      console.log("Error while OTP verification: ", err.message);
-    }
-  };
+// export const Otpverify2 = async ({email,otp}) => {
+//     try {
+//       return await axios.post(`${API_URL}/forgot-password`, { email,otp }); // Wrap otp in an object
+//     } catch (err) {
+//       console.log("Error while OTP verification: ", err.message);
+//     }
+//   };
   export const resetPassword = async (data) => {
     console.log(data);
     try {
@@ -105,9 +105,9 @@ export const Otpverify2 = async (otp) => {
       console.log("error while resetting password: ", err.message);
     }
   };
-  export const deleteUser = async (otp) =>{
+  export const deleteUser = async (email) =>{
     try{
-        return await axios.get(`${API_URL}/deleteUser`)
+        return await axios.post(`${API_URL}/deleteUser`,email)
     }catch(err){
         console.log("error while deleting user : " ,err.message)
     }

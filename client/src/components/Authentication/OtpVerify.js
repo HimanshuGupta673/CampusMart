@@ -1,29 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { Otpverify, deleteUser } from '../../redux/actions';
 import { ToastContainer, toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Loader from '../Loader/Loader';
+import { Params } from 'react-router-dom';
+import moment from 'moment';
 
 function OtpVerify() {
+  const params = useParams();
+  const { email } = params;
   const navigate = useNavigate();
   const [otp, setOTP] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [remainingTime, setRemainingTime] = useState(180);
+  const [minutes, setMinutes] = useState(3);
+  const [seconds, setSeconds] = useState(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setRemainingTime((prevTime) => prevTime - 1);
-    }, 1000);
 
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    const verify = await Otpverify(otp);
+    const verify = await Otpverify({ email, otp });
     setIsLoading(false);
     if (verify) {
       toast.success('Registration Successful', {
@@ -37,7 +35,7 @@ function OtpVerify() {
         navigate('/login');
       }, 1000);
     } else {
-       await deleteUser();
+      await deleteUser(email);
       toast.error('Registration failed', {
         position: 'top-center',
         autoClose: 1000,
@@ -49,9 +47,21 @@ function OtpVerify() {
       }, 1000);
     }
   };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRemainingTime((prevTime) => prevTime - 1);
+    }, 1000);
 
-  const minutes = Math.floor(remainingTime / 60);
-  const seconds = remainingTime % 60;
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+  useEffect(() => {
+    const duration = moment.duration(remainingTime, 'seconds');
+    setMinutes(duration.minutes());
+    setSeconds(duration.seconds());
+  }, [remainingTime]);
 
   return (
     <>
@@ -101,8 +111,8 @@ function OtpVerify() {
             />
           </div>
           <div className="text-center text-red-500 mt-1">
-        OTP expires in {minutes}:{String(seconds).padStart(2, '0')}
-      </div>
+            OTP expires in {minutes}:{String(seconds).padStart(2, '0')}
+          </div>
           <div className="text-center">
             <button
               type="submit"

@@ -1,9 +1,10 @@
 import React, { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { forgotPassword, Otpverify2 } from '../../redux/actions';
+import { forgotPassword, Otpverify} from '../../redux/actions';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import Loader from '../Loader/Loader';
+import moment from 'moment';
 
 function ForgotPassword() {
   const [email, setEmail] = useState('');
@@ -12,8 +13,10 @@ function ForgotPassword() {
   const navigate = useNavigate();
   const [isLoading,setIsLoading] = useState(false)
   const [remainingTime, setRemainingTime] = useState(180);
-  const minutes = Math.floor(remainingTime / 60);
-  const seconds = remainingTime % 60;
+  const [minutes, setMinutes] = useState(3);
+  const [seconds, setSeconds] = useState(0);
+
+  
 
   const submitEmail = async (e) => {
     e.preventDefault();
@@ -43,7 +46,7 @@ function ForgotPassword() {
   const verifyOtp = async (e) => {
     e.preventDefault();
     setIsLoading(true)
-    const verify = await Otpverify2(otp)
+    const verify = await Otpverify({email,otp})
     setIsLoading(false)
     if (verify) {
       navigate(`/reset-password/${email}`)
@@ -66,6 +69,12 @@ function ForgotPassword() {
       clearInterval(interval);
     };
   }, []);
+
+  useEffect(() => {
+    const duration = moment.duration(remainingTime, 'seconds');
+    setMinutes(duration.minutes());
+    setSeconds(duration.seconds());
+  }, [remainingTime]);
   return (
     <>
       <ToastContainer

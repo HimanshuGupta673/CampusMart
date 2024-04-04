@@ -96,6 +96,7 @@ export const getItemDetails = async (request, response) => {
   }
 }
 export const getCategoryItem = async (request, response) => {
+  console.log(request.params)
   try {
     let products = await item.find({ 'selectItem': request.params.category.toLowerCase() })
     if(products.length==0){
