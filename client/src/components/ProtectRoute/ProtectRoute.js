@@ -10,7 +10,7 @@ function ProtectRoute(props) {
     if (!login) {
         setTimeout(() => {
           navigate('/login');
-        }, 200);
+        }, 2000);
     } 
     
   }, [navigate]);

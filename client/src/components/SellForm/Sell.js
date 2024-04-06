@@ -6,7 +6,7 @@ import { useRef } from 'react';
 import Loader from '../Loader/Loader';
 import { useContext } from 'react';
 import AccountProvider, { AccountContext } from '../Context/AccountProvider'
-import { useNavigation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 function Sell() {
 
     const sellItemInitialValues = {
@@ -17,7 +17,7 @@ function Sell() {
         contactNo: '',
         price: '',
     };
-    const navigate = useNavigation()
+    const navigate = useNavigate()
     const { user } = useContext(AccountContext)
     const [sellItem, setsellItem] = useState({ ...sellItemInitialValues, email: user });
     const [selectItem, setSelectItem] = useState('');

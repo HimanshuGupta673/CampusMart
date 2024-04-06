@@ -17,9 +17,19 @@ function Items() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getAllItems());
-  }, [categoryItem])
+    const fetchData = () => {
+      try {
+        dispatch(getAllItems());
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    setIsLoading(true);
+    fetchData();
+  }, [dispatch]);
 
+  
   useEffect(() => {
     const usr = localStorage.getItem('login')
     if(!user){
@@ -27,7 +37,9 @@ function Items() {
     }
   }, []);
   
-
+  if (isLoading) {
+    return <div className='flex justify-center items-center'>{<Loader/>}</div>
+  }
   const getItems = () => {
     if (categoryItem.length !== 0) {
       return categoryItem.slice(0, numItemsToShow);
