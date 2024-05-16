@@ -15,8 +15,7 @@ function Categories() {
     <div className='categories mt-20 pl-1'>
   <div className="categoriesIn flex sm:bg-[#eff1f3] justify-evenly">
     <select value={selectCategory} onChange={(e) => setSelectCategory(e.target.value)} name="cars" id="cars" className='h-7 my-auto bg-[#eff1f3] cursor-pointer w-[60%] sm:w-auto'>
-      <option disabled>Category</option>
-      <option>All</option>
+      <option>Category</option>
       <option>Cooler</option>
       <option>Cycle</option>
       <option>Electric Kettle</option>

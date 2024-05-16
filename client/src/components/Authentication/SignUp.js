@@ -30,6 +30,7 @@ function SignUp() {
 
   const signUpUser = async (e) => {
     e.preventDefault();
+  
     if (signup.email === '' || !signup.email.includes("@")) {
       toast.error("Enter a valid email");
     } else if (signup.password === '') {
@@ -37,18 +38,22 @@ function SignUp() {
     } else if (signup.password.length < 8) {
       toast.error("Password must contain at least 8 characters");
     } else {
-      setIsLoading(true)
-      const response = await authenticateSignUp(signup);
-      const {email} = response;
-      setIsLoading(false)
-      if (response) {
-        if (response.data.errors) {
-          const { email, password } = response.data.errors;
+      setIsLoading(true);
+  
+      try {
+        const response = await authenticateSignUp(signup);
+        const data = await response.data;
+        // console.log(signup, "in frontend signup values");
+        console.log(response.data.email, "in signup");
+  
+        setIsLoading(false);
+  
+        if (data.errors) {
+          const { email, password } = data.errors;
           if (email) generateError(email);
-          else if (password) generateError(password);
-          // setSignup(signupInitialValues);
+          if (password) generateError(password);
         } else {
-          navigate(`/optVerification?email=${signup.email}`);
+          navigate(`/optVerification?email=${data.email}`);
           toast.success('OTP Sent Successfully', {
             position: "top-center",
             autoClose: 1000,
@@ -56,14 +61,16 @@ function SignUp() {
             closeOnClick: true,
             theme: "colored",
           });
-          // setTimeout(() => {
-          //   setSignup(signupInitialValues);
-          // }, 2000); // Delay of 1 second before redirecting
+          setSignup(signupInitialValues);
         }
-        setSignup(signupInitialValues);
+      } catch (error) {
+        console.error("Error during sign up:", error);
+        toast.error("Sign up failed. Please try again.");
+        setIsLoading(false);
       }
     }
   };
+  
 
 
   return (

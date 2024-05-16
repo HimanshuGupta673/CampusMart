@@ -36,7 +36,7 @@ function App() {
                   <Route path='/optVerification' element={<OtpVerify/>}/>
                   <Route path='/ItemInfo/:id' element={<ItemInfo/> }/>
                   <Route path='/forgot-password' element={<ForgotPassword/> }/>
-                  <Route path='/reset-password/:email' element={<ResetPassword/> }/>
+                  <Route path='/reset-password' element={<ResetPassword/> }/>
               </Routes> 
           <Footer/>
         </Router>

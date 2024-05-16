@@ -1,7 +1,8 @@
 import { SELL_NEWITEM ,GET_ALLITEMS ,GET_ITEMDETAILS ,GET_CATEGORYITEMDETAILS,ADD_TOCART,GET_CARTITEMS,DELETE_CARTITEM } from "./type";
 import axios from 'axios';
 
-const API_URL = 'https://campusmart-lxbl.onrender.com'
+// const API_URL = 'https://campusmart-lxbl.onrender.com'
+const API_URL = 'http://localhost:8000'
 
 export const sellNewItem = (data) => async(dispatch) => {
     try {

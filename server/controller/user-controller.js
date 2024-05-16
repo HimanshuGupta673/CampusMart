@@ -30,44 +30,53 @@ export const forgotPassword = async (request, response) => {
     return response.status(500).json(err.message);
   }
 }
-export const otpVerify = async (request, response) => {
+export const otpVerify = async (req, res) => {
   try {
-    const { email, otp } = request.body;
-    const verify = await User.findOne({ email: email });
+    const { email, otp } = req.body;
+    console.log("In backend, email and OTP received:", email, otp);
 
-    if (!verify) {
-      return response.status(400).json({ error: "User not found" });
+    const user = await User.findOne({ email: email });
+    console.log("In backend, user found:", user);
+
+    if (!user) {
+      return res.status(400).json({ error: "User not found" });
     }
 
     const currTime = new Date();
-    const isOTPValid = verify.otp === otp && new Date(verify.otpExpiration) > currTime;
+    const isOTPValid = user.otp === otp && new Date(user.otpExpiration) > currTime;
 
     if (isOTPValid) {
-      await deleteOTP2(verify.email);
-      return response.status(200).json(verify); // Return the `verify` object
+      await deleteOTP2(user.email);
+      return res.status(200).json(user); 
     } else {
-      return response.status(400).json({ error: "Invalid OTP or OTP expired" });
+      return res.status(400).json({ error: "Invalid OTP or OTP expired" });
     }
   } catch (error) {
-    return response.status(500).json({ error: "An error occurred" });
+    console.error("Error during OTP verification:", error);
+    return res.status(500).json({ error: "An internal server error occurred" });
   }
 };
+
 
 async function deleteOTP2(email) {
   try {
     await User.updateOne({ email: email }, { $unset: { otp: 1, otpExpiration: 1 } });
-    response.json("OTP deleted successfully");
+    return "OTP deleted successfully";
   } catch (error) {
-    response.json({ error: 'Error deleting OTP:' });
+    throw new Error('Error deleting OTP');
   }
 }
 export const resetPassword = async (request, response) => {
   const { email, password } = request.body;
+  console.log(email,password,"in reset password")
   // const user = await User.findOneAndUpdate()
   try {
+    const salt = await bcrypt.genSalt(10);
+    const newPassword = await bcrypt.hash(password, salt)
     const newUser = await User.findOneAndUpdate(
+
       { email: email },
-      { $set: { password: password } },
+      { $set: { password: newPassword } },
       { new: true }
     );
     return response.status(200).json("password successfully reset")

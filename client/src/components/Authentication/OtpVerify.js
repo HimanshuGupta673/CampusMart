@@ -3,12 +3,14 @@ import { Otpverify, deleteUser } from '../../redux/actions';
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate, useParams } from 'react-router-dom';
 import Loader from '../Loader/Loader';
-import { Params } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import queryString from 'query-string';
 import moment from 'moment';
 
 function OtpVerify() {
-  const params = useParams();
-  const { email } = params;
+  const location = useLocation();
+  const { email } = queryString.parse(location.search);
+  console.log(email)
   const navigate = useNavigate();
   const [otp, setOTP] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -21,6 +23,7 @@ function OtpVerify() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    console.log(email,otp ,"in frontend mail and otp value in otpverify")
     const verify = await Otpverify({ email, otp });
     setIsLoading(false);
     if (verify) {

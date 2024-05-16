@@ -17,10 +17,12 @@ function ForgotPassword() {
   const [seconds, setSeconds] = useState(0);
 
   
+  
 
   const submitEmail = async (e) => {
     e.preventDefault();
     setIsLoading(true)
+    console.log(email,"forgot-password")
     const response = await forgotPassword(email);
     setIsLoading(false)
     setRes(response); // Updated: Set the response to res
@@ -46,10 +48,11 @@ function ForgotPassword() {
   const verifyOtp = async (e) => {
     e.preventDefault();
     setIsLoading(true)
+    console.log(email,otp,"otp verify");
     const verify = await Otpverify({email,otp})
     setIsLoading(false)
     if (verify) {
-      navigate(`/reset-password/${email}`)
+      navigate(`/reset-password?email=${email}`)
     } else {
       toast.error('OTP verification failed', {
         position: 'top-center',
