@@ -8,7 +8,7 @@ const DB_PASSWORD = process.env.DB_PASSWORD;
 
 const Connection = () => {
 
-    const MONGODB_URI = `mongodb+srv://Himanshu:EyGRsYWT3DQgVIC7@cluster0.cdfcrd3.mongodb.net/?retryWrites=true&w=majority`;
+    const MONGODB_URI = `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@cluster0.cdfcrd3.mongodb.net/?retryWrites=true&w=majority`;
     // const MONGODB_URI = `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@cluster0.cdfcrd3.mongodb.net/?retryWrites=true&w=majority`;
 
     mongoose.connect(MONGODB_URI, { useUnifiedTopology: true, useNewUrlParser: true});
