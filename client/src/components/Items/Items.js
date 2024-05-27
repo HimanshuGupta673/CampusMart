@@ -43,7 +43,7 @@ function Items() {
   const getItems = () => {
     if (categoryItem.length !== 0) {
       return categoryItem.slice(0, numItemsToShow);
-    } else  {
+    } else {
       return items.slice(0, numItemsToShow);
     }
   };
@@ -76,7 +76,7 @@ function Items() {
         >
           <div className="itemsBodyIn grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4  mt-3 mb-6">
           {items.length === 0 && (
-            <div className=" mt-20 mx-auto "><h1 className='text-xl flex justify-center'>No item on sale...</h1></div>
+            <div className=" mt-20 mx-auto "><h1 className='text-xl flex justify-center'>Loading...</h1></div>
           )}
           {getItems().map((item) => (
             <Item key={item._id} item={item} />
