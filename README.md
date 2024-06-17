@@ -17,8 +17,8 @@ College Marketplace is a web application that allows college students to list it
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/college-marketplace.git
-   cd campusmart
+   git clone https://github.com/HimanshuGupta673/CampusMart.git
+   cd CampusMart
    ```
 
 2. **Install dependencies**
@@ -28,14 +28,15 @@ College Marketplace is a web application that allows college students to list it
    npm install
 
    # For frontend
-   cd ../frontend
+   cd ../client
    npm install
    ```
 
 3. **Set up environment variables**
    Create a `.env` file in the `backend` directory with the following variables:
    ```plaintext
-   MONGO_URI=your_mongo_connection_string
+   DB_USERNAME=your_mongo_connection_username
+   DB_PASSWORD=your_mongo_connection_password
    ```
 
 4. **Run the application**
